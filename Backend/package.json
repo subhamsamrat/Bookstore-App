@@ -1,0 +1,29 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "bookstare app",
+  "homepage": "https://github.com/subhamsamrat/Bookstore-App#readme",
+  "bugs": {
+    "url": "https://github.com/subhamsamrat/Bookstore-App/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/subhamsamrat/Bookstore-App.git"
+  },
+  "license": "ISC",
+  "author": "subham samrat jena",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.0",
+    "nodemon": "^3.1.10"
+  }
+}

@@ -28,7 +28,7 @@ function Banner() {
 </label>
  </div>
 
-    <button className="btn mt-5 btn-secondary">Secondary</button>
+    <button className="btn mt-5 btn-secondary">Get start</button>
     </div>
     {/* right side */}
     <div className='mt-1 flex-col mt-10 md:flex-row-full md:w-1/2 order-1 md:order-2'>

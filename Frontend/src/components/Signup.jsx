@@ -1,17 +1,50 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Login from './Login'
+import axios from 'axios'
 import { useForm } from 'react-hook-form'
+import toast from 'react-hot-toast'
 
 function Signup() {
+  const location=useLocation()
+  const form=location.state?.form?.pathname || "/"
+  const navigate=useNavigate();
      const {
       register,
       handleSubmit,
       formState: { errors },
     } = useForm()
   
-    const onSubmit = (data) => console.log(data)
-  
+    const onSubmit = async(data) => {
+      const userInfo={
+        fullname:data.fullname,
+        email:data.email,
+        password:data.password
+      }
+    
+
+    await axios.post("http://localhost:8000/user/signup",userInfo)
+    .then((res)=>{
+      console.log(res.data);
+      if(res.data){
+           toast.success("Signup succesful !");
+           navigate(form,{replace:true}); 
+           setTimeout(()=>{
+              window.location.reload()
+           },1000)
+           
+      }
+     localStorage.setItem("Users", JSON.stringify(res.data.user));
+          
+         
+    }).catch((error)=>{
+      if(error.response){
+        console.log(error);
+        toast.error(error.response.data.message);
+      }
+         
+    })
+    }
   return (
     <>
     <div className='flex justify-center items-center h-screen'>
@@ -37,9 +70,9 @@ function Signup() {
               className="hover:bg-gray-200 text-sm rounded-md w-90 py-1 px-2"
               type="text"
               placeholder="Enter your Full name"
-               {...register("Fullname", { required: true })}
+               {...register("fullname", { required: true })}
             /> <br />
-            {errors.Fullname && <span className="text-sm text-red-500 absolute top-70 ">Name require</span>}
+            {errors.fullname && <span className="text-sm text-red-500 absolute top-70 ">Name require</span>}
             <br />
 
             <span className="text-sm ">Email</span>
@@ -58,7 +91,7 @@ function Signup() {
             <input
               className="hover:bg-gray-200 text-sm rounded-md w-90 py-1 px-2"
               type="password"
-              placeholder="Enter your password"
+              placeholder="Enter your pas sword"
                {...register("password", { required: true })}
             /> <br />
             {errors.password && <span className="text-sm text-red-500 absolute top-112   ">password require</span>}
